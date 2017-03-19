@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { SEARCH_URLS, GENERICS }  from '../app.constant';
+import { SEARCH_URLS, GENERICS, ENV }  from '../app.constant';
 import { ICategory } from '../common/interfaces/offer';
 import { $WebSocket } from 'angular2-websocket/angular2-websocket';
 import { SessionService } from '../common/sessionService';
@@ -39,13 +39,6 @@ export class HomeComponent implements OnInit  {
 	   this.getSortTypeList();
 	}
 
-	this.http.get(apiUrl)
-					 .map(res => res.json())
-					 .subscribe(
-					    data => callback(data),
-					    err => this.handleError(err),
-					    () => console.log('api call completed')
-					  );
 
 	getSortTypeList(){
 		this.http.get(this.ENV.apiBasePath + this.GENERICS.GET_SORT_TYPE)

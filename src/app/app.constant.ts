@@ -138,5 +138,13 @@ export const CONTACT_MANAGEMENT = {
   SEND: 'contact-management/contact/insert'
 }
 
+export const ENV = {
+  name: 'development',
+  apiBasePath: '/NedbenRestServer/',
+  authBasePath: '/AuthRest/',
+  WS: 'wss://www.nedben.com:28443/userWebSocket/',
+  domainBaseUrl:'https://www.nedben.com/it/index.html#/',
+}
+
 
 

@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html class="no-js" lang="" ng-app="nedben" ng-clock ng-class="ng-clock">
+<html lang="" >
 <head>
   <link rel="icon" type="image/png" href="http://static.nedben.com/img/loghi/favicon-16.png" sizes="16x16">
 
@@ -15,23 +15,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="nedben:offer:id" content={{offerMetaTag.id}} ng-if="offerMetaTag"/>
 
-  <!-- build:css(.tmp) styles/bootstrap.css -->
-  <link rel="stylesheet" href="assets/styles/bootstrap.css"/>
-  <link rel="stylesheet" href="assets/styles/bootstrap-theme.css"/>
-  <link rel='stylesheet' href='assets/styles/textAngular.css'>
-  <link rel='stylesheet' href='assets/styles/toastr.css'>
-  <link rel='stylesheet' href='assets/styles/loading-bar.css'>
-  <link rel="stylesheet" href="bower_components/ng-img-crop/compile/unminified/ng-img-crop.css"/>
-  <!-- endbuild -->
-
-  <!-- build:css(.) styles/vendor.css -->
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/>
-
-  <!-- endbuild -->
-
-  <!-- build:css({.tmp,app}) styles/main.css -->
-  <link rel="stylesheet" href="assets/styles/main.css">
-  <!-- endbuild -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  
   <script type="text/javascript">
     var _iub = _iub || [];
         _iub.csConfiguration = {
@@ -55,110 +40,15 @@
   your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<!-- build:js(.) scripts/plugins.js -->
-<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
-<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>  
-<!-- rangy -->
-<script src='bower_components/rangy/rangy-core.js'></script>
-<script src='bower_components/rangy/rangy-selectionsaverestore.js'></script>
 
-<!-- toastr -->
-<script src="bower_components/toastr/toastr.js"></script>
-<script src='bower_components/angular/angular.js'></script>
-<script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src='bower_components/angular-ui-router/release/angular-ui-router.js'></script>
-<script src='bower_components/angular-websocket/dist/angular-websocket.js'></script>
-<script src='bower_components/angular-loading-bar/build/loading-bar.js'></script>
-<!-- angular-bootstrap -->
-<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<!-- TextAngular -->
-<script src='bower_components/textAngular/dist/textAngular-sanitize.js'></script>
-<script src='bower_components/textAngular/dist/textAngularSetup.js'></script>
-<script src='bower_components/textAngular/dist/textAngular.js'></script>
-<!-- Angular Fileupload -->
-<script src='bower_components/angular-file-upload/dist/angular-file-upload.min.js'></script>
-<!-- angular-social -->
-<script src='bower_components/angular-socialshare/dist/angular-socialshare.js'></script>
-<!-- angular-sly -->
-<script src='bower_components/sly/dist/sly.js'></script>
-<script src='bower_components/angular-sly/src/angular-sly.js'></script>
-<script src='bower_components/angular-sly/src/slyDrtv.js'></script>
+  <my-app>
+    Loading...
+  </my-app>
 
-<script src='bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js'></script>
-<!--ng Crop-->
-<script src='bower_components/ng-img-crop/compile/unminified/ng-img-crop.js'></script>
-<!-- ngMetaTag-->
-<script src='bower_components/ngMeta/dist/ngMeta.min.js'></script>
-<!-- moment -->
-<!-- <script src='bower_componenets/moment/moment.js'></script> -->
-<!-- endbuild -->
-<!-- build:js({.tmp,app}) scripts/scripts.js -->
-<script src="scripts/app.modules.js"></script>
-<script src="scripts/app.routes.js"></script>
-<script src="scripts/config.js"></script>
-<script src="scripts/commons/commons.js"></script>
-<script src="scripts/commons/interceptor.js"></script>
-<script src="scripts/commons/constants.js"></script>
-<script src="scripts/commons/filters.js"></script>
-<script src="scripts/commons/notifications.js"></script>
-<script src="scripts/commons/session/session-factory.js"></script>
-<script src="scripts/commons/time-factory.js"></script>
-<script src="scripts/commons/forum-factory.js"></script>
-<script src="scripts/directives/module.js"></script>
-<script src="scripts/directives/topnavbar/topnavbar.js"></script>
-<script src="scripts/directives/slider/slider.js"></script>
-<script src="scripts/directives/search/search.js"></script>
-<script src="scripts/directives/auth/auth-directives.js"></script>
-<script src="scripts/directives/auth/registration.js"></script>
-<script src="scripts/directives/offer-list/offer-list.js"></script>
-<script src="scripts/directives/offer/offer.js"></script>
-<script src="scripts/directives/offer-detail/offer-detail.js"></script>
-<script src="scripts/directives/offer-form/offer-form.js"></script>
-<script src="scripts/directives/thread-list/thread-list.js"></script>
-<script src="scripts/directives/thread-item/thread-item.js"></script>
-<script src="scripts/directives/comment-form/comment-form.js"></script>
-<script src="scripts/directives/advice-list/advice-list.js"></script>
-<script src="scripts/directives/advice/advice.js"></script>
-<script src="scripts/directives/advice-detail/advice-detail.js"></script>
-<script src="scripts/directives/advice-form/advice-form.js"></script>
-<script src="scripts/directives/reset-pwd/reset-pwd.js"></script>
-<script src="scripts/directives/footer/footer.js"></script>
-<script src="scripts/directives/profile-lists/profilelists.js"></script>
-<script src="scripts/directives/profile-lists/useroffer.js"></script>
-<script src="scripts/directives/report-spam/report-spam.js"></script>
-<script src="scripts/directives/profile-avatar/profile-avatar.js"></script>
-<script src="scripts/directives/profile-avatar/file-model.js"></script>
-<script src="scripts/directives/user-personalinfo/user-personalinfo.js"></script>
-<script src="scripts/directives/message-list/message-list.js"></script>
-<script src="scripts/directives/message-form/message-form.js"></script>
-<script src="scripts/directives/message-trail/message-trail.js"></script>
-<script src="scripts/directives/search-friend/search-friend.js"></script>
-<script src="scripts/pages/pages-module.js"></script>
-<script src="scripts/pages/home/home.js"></script>
-<script src="scripts/pages/profile/profile.js"></script>
-<script src="scripts/pages/inserisci-offerta/inserisci-offerta.js"></script>
-<script src="scripts/pages/offerta/offerta.js"></script>
-<script src="scripts/pages/profile/profile.js"></script>
-<script src="scripts/pages/forum/consigli.js"></script>
-<script src="scripts/pages/inserisci-consiglio/inserisci-consiglio.js"></script>
-<script src="scripts/pages/pagina-qr/pagina-qr.js"></script>
-<script src="scripts/pages/search/search.js"></script>
-<script src="scripts/pages/search/community.js"></script>
-<script src="scripts/pages/setting/setting.js"></script>
-<script src="scripts/pages/info-boards/info-boards.js"></script>
-<!-- endbuild -->
-<div ng-controller="appCntroller">
-<div  id="div-babel-it-app" ng-strict-di>
-  <div ui-view ng-cloak ></div>
-</div>
-</div>
-<!--[if lt IE 9]>
-<script src="bower_components/es5-shim/es5-shim.js"></script>
-<script src="bower_components/json3/lib/json3.min.js"></script>
-<![endif]-->
-
-
-
+  
+  <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
+  <!-- Webpack Dev Server reload -->
+  <script src="/webpack-dev-server.js"></script>
+  <% } %>
 </body>
 </html>
