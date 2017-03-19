@@ -3,15 +3,13 @@
  */
 
   
-export class TimeFactory {
+export class TimeService {
   private seconds:any;
   private interval:any;
   private day:any;
   
-  static factory() {
-    const factory = () => new TimeFactory();
-    return factory;
-  }
+  constructor() {};
+
 
   getTimeSince(date) {
       this.seconds = Math.floor((+new Date() - date) / 1000);

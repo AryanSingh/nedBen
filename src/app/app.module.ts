@@ -6,36 +6,22 @@ import { HttpModule }    from '@angular/http';
 import 'hammerjs';
 import { AppComponent }  from './app.component';
 import { AppService } from './app.service';
-import { ConstantsApi } from './app.constant';
-import { ApiService } from './common/services/api.service';
-import { SearchService } from './common/services/search.service';
-import { ContactModule } from './contact/contact.module';
-import { DetailsModule } from './details/details.module';
-import { PaymentsModule } from './payments/payments.module';
-import { ProfileModule } from './profile/profile.module';
-import { RequestsModule } from './requests/requests.module';
-import { RouterModule, Routes } from '@angular/router';
-import { DetailsComponent } from './details/details.component';
-import { PaymentsComponent } from './payments/payments.component';
-import { ProfileComponent } from './profile/profile.component';
-import { RequestsComponent } from './requests/requests.component';
-
+import { HomeModule } from './home/home.module';
+import { HomeComponent } from './home/home.component';
+import { forumService } from './common/forumService';
+import { sessionService } from './common/sessionService';
+import { timeService } from './common/timeService';
 
 import { PathLocationStrategy, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import '../styles/styles.scss';
 
 const Allroutes: Routes = [
-  { path: '', redirectTo: 'details', pathMatch: 'full'},
+  { path: '', redirectTo: '', pathMatch: 'full'},
   { 
-    path: 'details',
-    component: DetailsComponent 
+    path: 'home',
+    component: HomeComponent 
   },
-  { path: 'payments', component: PaymentsComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'requests', component: RequestsComponent },
-  { path: '**', component: DetailsComponent }
-
-  
+  { path: '**', component: HomeComponent }
 ];
 
 export class MyHammerConfig extends HammerGestureConfig  {
@@ -52,19 +38,14 @@ export class MyHammerConfig extends HammerGestureConfig  {
 
 @NgModule({
   imports:      [ BrowserModule,
-                  ReactiveFormsModule,
-                  HttpModule,
-                  DetailsModule,
-                  PaymentsModule,
-                  ProfileModule,
-                  RequestsModule,
+                  HomeModule,
                   RouterModule.forRoot(Allroutes)
                 ],
 
   declarations: [
                   AppComponent
                 ],
-  providers: [ ApiService, SearchService, AppService, {provide: LocationStrategy, useClass: HashLocationStrategy}, { 
+  providers: [ forumService , sessionService , timeService, {provide: LocationStrategy, useClass: HashLocationStrategy}, { 
                     provide: HAMMER_GESTURE_CONFIG, 
                     useClass: MyHammerConfig 
                 } ],

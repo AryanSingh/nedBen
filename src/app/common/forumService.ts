@@ -1,11 +1,8 @@
 
-export class ForumFactory {
+export class ForumService {
 	private forumData:any;
 	private threadCount:number;
-	static factory() {
-	  const factory = () => new ForumFactory();
-	  return factory;
-	}
+	constructor() {};
 
 	getForumDetail(){
 	  if(this.forumData){
