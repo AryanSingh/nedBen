@@ -1,0 +1,8 @@
+
+<!-- OFFER LIST -->
+<div ng-show="offerList.pageLoadStatus==true" class="row">
+  <div infinite-scroll="offerList.getList()" infinite-scroll-distance="1" infinite-scroll-disabled="offerList.scrollStatus" class="col-md-offset-1 col-md-10">
+    <offer ng-repeat="item in offerList.list" offer-id="item">{{offerList.sortFilter}}</offer>
+    <div ng-if="offerList.list.length === 0" class="alert alert-warning">AL MOMENTO NON CI SONO OFFERTE &nbsp;&nbsp;<a style="cursor:pointer;"><i ng-click="offerList.getList()" class="fa fa-refresh"></i></a></div>
+  </div>
+</div>

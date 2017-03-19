@@ -1,0 +1,76 @@
+.footer-section {
+    background-color: @brand-footer-bg;
+    padding: 1rem 0 3rem 0;
+    
+    .footer-header {
+        color: @brand-text-light-color;
+        font-size: 1.8rem;
+        padding: 1rem 0 1rem 0;
+        font-family: HelveticaNeueLTStd-BdCn;
+    }
+    a {
+        font-family: HelveticaNeueLTStd-Cn;
+        font-size: 1.5rem;
+        padding: 3px 1px 1px 1px;
+        color: @brand-text-light-color;
+        text-decoration: none;
+
+        &:hover {
+            background-color: @brand-text-light-color;
+            color: @brand-footer-bg;
+        }
+        &:focus {
+        }
+        i {
+            font-size: 4rem;
+            color: @gray-light;
+            margin-right: 1rem;
+        }
+    }
+}
+
+.footer-section .footer-social a:hover   {
+    background:transparent !important;
+   
+}
+.footer-section .footer-social a:hover i {
+    color: #ffffff !important;
+}
+/* Invetech 03/11/2016 */
+// footer {
+// 
+//     bottom: 0;
+//     height:0;
+//    
+//     position: absolute;
+//     width: 100%;
+// }
+/* Invetech 27/12/2016 */
+@media (min-width:320px) and (max-width:767px){
+ .footer-section a i {
+    font-size: 2rem;
+    color: #777777;
+    margin-right: 0rem;
+ 
+}
+.footer-header-inner > div:first-child {
+ display:block;
+ color: #ffff;
+ font-size: 1rem;
+ background: rgba(0,0,0,0.1);
+ text-align: center;
+ border-radius: 20px;
+}
+.footer-header-inner > div {
+ display:none;
+}
+.footer-header-size{
+   font-size: 1rem !important;
+   padding-top:0px !important;
+   padding-bottom:0px !important;
+}
+.footer-section {
+    background-color: #393939;
+    padding: 2rem 0 2rem 0;
+    }
+}
