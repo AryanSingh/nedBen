@@ -1,0 +1,20 @@
+<div class='drop-down-holder multi-select-holder'>
+    <div style="border-radius:0;"class='btn-holder'
+         (click)="showDropdown = !showDropdown">
+        <div class='selected-value-holder'>
+            <span *ngIf="selectedValue.length > 0" style="font-family:lato;font-size:16px;color:black"><h4 style="color:black;margin-top:0;margin-bottom:0;text-align:left;">{{selectedValuesText}}</h4></span>
+            <span *ngIf="selectedValue.length === 0" style="font-family:lato;font-size:16px;color:black"><h4 style="color:black;margin-top:0;margin-bottom:0;text-align:left;">{{defaultHeading}}</h4></span>
+        </div>
+        <span class='icon-holder'><i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></span>
+    </div>
+    <div class='dropdown'
+         *ngIf='showDropdown'>
+        <ul>
+            <li *ngFor="let item of items"
+                (click)="itemClick(item ,$event)">
+                <i class='fa' [ngClass]="{'fa-square-o unchecked' : !item.selected,'fa-check-square checked' : item.selected}"></i>
+                <span style="font-family:lato;font-size:16px;">{{item.displayText}}</span>
+            </li>
+        </ul>
+    </div>
+</div>

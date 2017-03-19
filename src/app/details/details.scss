@@ -1,0 +1,16 @@
+@import '../common/styles/variables.scss';
+@import '../common/styles/core.scss';
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    // overflow-y: hidden;
+}
+
+h2,h3,h4,h5,p,input,span,label{
+  font-family: 'Lato';
+}
+

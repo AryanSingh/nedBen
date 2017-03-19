@@ -1,0 +1,62 @@
+@import './variables.scss';
+@import './core.scss';
+.drop-down-holder{
+	position : relative;
+	.btn-holder{
+	  padding : 10px 15px;
+	  background-color: white;
+      border-radius: 4px;
+      height: 36px;
+      cursor : pointer;
+	  .selected-value-holder{
+          width: 89%;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+	    span{
+            font-family : lato;
+	    }
+	  }
+	  span.icon-holder{
+	    position : absolute;
+	    right : 15px;
+	    top : 10px;
+	  }
+	}
+	.dropdown{
+	  position : absolute;
+	  border-radius : 4px;
+	  background-color : white;
+	  width : 100%;
+	  top : 38px;
+      z-index : 5;
+      max-height: 240px;
+      overflow-y: auto;  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+	  ul{
+	    padding : 0;
+	    list-style-type : none;
+	    margin : 0;
+	    li{
+	      padding : 10px;
+	      border-bottom : 1px solid #d3dde6;
+          cursor : pointer;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            span{
+                font-family : lato;
+            }
+	    }
+        li.active{
+           background-color : $dropdown-select-bg;
+        }
+	    li:last-child{
+	     border-bottom : 0;
+         border-radius : 0 0 4px 4px;
+	    }
+        li:first-child{
+            border-radius : 4px 4px 0 0;
+        }
+	  }
+	}
+}

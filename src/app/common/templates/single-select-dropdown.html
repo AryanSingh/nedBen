@@ -1,0 +1,20 @@
+<div class='drop-down-holder'>
+	<div class='btn-holder'
+	     (click)="showDropdown = !showDropdown">
+		<div class='selected-value-holder'>
+            <span *ngIf="selectedValue">{{selectedValue.displayText}}</span>
+            <span *ngIf="!selectedValue">{{defaultHeading}}</span>
+        </div>
+		<span class='icon-holder'><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+	</div>
+	<div class='dropdown'
+	     *ngIf='showDropdown'>
+		<ul>
+			<li *ngFor='let item of items'
+                [ngClass]="{'active' : item.selected}"
+                (click)="itemClick(item)">
+                <span>{{item.displayText}}</span>
+            </li>
+		</ul>
+	</div>
+</div>
