@@ -1,0 +1,104 @@
+
+<!-- OFFER DETAIL-->
+<div ng-if="offerDetail.offerData" style="background:transparent;" class="offer-detail">
+  <div class="row">
+    <div class="col-md-12">
+      <section class="offer-detail-header">
+        <h1 style="padding: 2rem 5rem !important;">{{offerDetail.offerData.name +' '+offerDetail.offerData.price+' € @ '}}{{offerDetail.offerData.vendor.affiliationType | proper}}</h1>
+      </section>
+    </div>
+  </div>
+  <div style=" margin-left:0px;margin-right:0px;" class="row">
+    <div style="padding-left:0px;padding-right:0px; margin-top:2px;" class="col-md-7 col-xs-12 col-sm-12">
+      <div style="margin-left:0px;margin-right:3px; padding: 2.1rem 0px;" class="row offer-background">
+        <div class="col-sm-4 col-md-4 col-xs-12 ">
+          <section class="offer-score">
+            <div class="offer-rating-container">
+              <div class="offer-rating ">
+                <dinitish>
+                  <v class="rating-value">
+                    <h1 class="text-center">{{offerDetail.offerData.score}}</h1>
+                    <div>
+                      <h3 class="text-center">score</h3>
+                    </div>
+                  </v>
+                </dinitish>
+                <div ng-disabled="offerDetail.offerData.rateUserLogged != 0" class="rating-buttons">
+                  <div class="text-center vote-container left">
+                    <div ng-class="{'active': offerDetail.offerData.rateUserLogged === 1}" class="image-container"><a ng-click="offerDetail.rateOffer(1)"><img ng-src="assets/images/icon-upvote.png"/></a></div>
+                  </div>
+                  <div class="text-center vote-container right">
+                    <div ng-class="{'active': offerDetail.offerData.rateUserLogged === 0}" class="image-container"><a ng-click="offerDetail.rateOffer(-1)"><img ng-src="assets/images/icon-downvote.png"/></a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12">
+          <section class="profile-resume1 clearfix">
+            <div style="padding-left: 0;padding-right:0px" class="col-md-3 col-sm-3 col-xs-3"><a ng-href="#/uprofile/{{offerDetail.offerData.user.id}}" class="profile-name">
+                <div ng-show="offerDetail.offerData.user.urlAvatar===null" class="profile-offer-image"><img ng-src="assets/images/icon-nedben-face.png"/></div>
+                <div ng-show="offerDetail.offerData.user.urlAvatar!==null" class="profile-offer-image"><img ng-src="{{offerDetail.offerData.user.urlAvatar}}"/></div></a></div>
+            <div style="padding-left: 5px;padding-right:0px" class="col-md-9 col-sm-9 col-xs-7">																			
+              <p class="nick-name-offer"><a ng-href="#/uprofile/{{offerDetail.offerData.user.id}}">{{offerDetail.offerData.user.nickname}}</a></p>
+              <p class="profile-created-offer">Creato {{offerDetail.daysFrom}} giorni fa.</p>
+              <p class="profile-button-lev">Liv. {{offerDetail.offerData.user.userLevel.idUserLevel}}</p>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div style="margin-left:0px;margin-right:3px;" class="row offer-background">
+        <div ng-show="offerDetail.offerData.user.badgeLevels.length &gt; 0" class="col-md-12 col-sm-12 col-xs-12  mb-left-0 divider">
+          <div class="profile-badges-container mb-scrn-bdge-cntnr ">
+            <button class="prev"><i class="glyphicon glyphicon-chevron-left "></i></button>
+            <button class="next"><i class="glyphicon glyphicon-chevron-right "></i></button>
+            <div class="badges-frame">
+              <ul class="list-inline horizontal badges-slidee">
+                <li sly-horizontal-repeat="sly-horizontal-repeat" sly-options="{easing: 'swing'}" ng-repeat="badge in offerDetail.offerData.user.badgeLevels"><img ng-src="{{offerDetail.IMAGES_URLS.DOMAIN}}{{offerDetail.IMAGES_URLS.BADGES}}{{badge.imgBadgeLevel}}" title="{{badge.badgeLevelName + ' - level ' + badge.level}}" class="img-responsive"/></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding-left:2px;padding-right:0px; margin-top:2px;padding:1rem;" class="col-md-5 col-xs-12 col-sm-12  offer-detail-image-container offer-background ">
+      <div class=" offer-pddng1  ">
+        <div style="position:relative;top:0px;left:0px; padding-left:0px;padding-right:0px;" class="col-md-5 col-sm-5 col-xs-12"><img rel="nofollow" ng-src="{{offerDetail.offerData.imgUrl}}" ng-if="offerDetail.offerData.imgUrl" class="parent-image img-responsive"/><img ng-src="assets/images/Senza_Immagine.svg" ng-if="!offerDetail.offerData.imgUrl" class="parent-image img-responsive"/><img ng-src="assets/images/scaduta.png" ng-if="offerDetail.offerData.expired" class="ovrlap-img-pos  img-responsive"/>
+          <div class="offer-price-block text-center">{{offerDetail.offerData.price}} &euro;</div>
+        </div>
+        <div class="col-md-7 col-sm-7 col-xs-12"><a ng-href="{{offerDetail.offerData.url}}" rel="nofollow" target="_blank" style="line-height: 3.8rem;" class="btn btn-flat-danger btn-block">VAI ALL'OFFERTA</a>
+          <button style="line-height: 3.8rem;" class="btn btn-flat-primary btn-block">VENDOR: {{ offerDetail.offerData.vendor.description}}</button><a ng-href="#/category/{{offerDetail.offerData.category.idCategory}}" style="line-height: 3.8rem; display:block!important;" class="btn btn-flat-primary btn-block">CATEGORIA:&nbsp;<span title="{{offerDetail.offerData.category.descCategory}}">{{offerDetail.offerData.category.descCategory}}</span></a>
+          <button style="line-height: 3.8rem;" class="btn btn-flat-primary btn-block">TAG:<span ng-repeat="tag in offerDetail.offerData.tags">{{tag}}<span ng-if="!$last">,&nbsp;</span></span></button>
+          <div style="padding-left:0px;padding-right:0px;" class="col-md-6 col-sm-6 col-xs-12 text-center data-mrgn">
+            <p class="data-color">	Data iniziale:</p>
+            <p class="data-color">	 {{offerDetail.offerData.startDate | date:'dd/MM/yyyy'}}</p>
+          </div>
+          <div style="padding-left:0px;padding-right:0px;" class="col-md-6 col-sm-6 col-xs-12 text-center data-mrgn">
+            <p class="data-color">	Data finale:</p>
+            <p class="data-color">	 {{offerDetail.offerData.endDate | date:'dd/MM/yyyy'}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mg-l-0 bg-col-white offer-full-description">
+    <div class="col-md-12">
+      <section class="offer-detail-content">
+        <p ng-bind-html="offerDetail.offerData.description"></p>
+        <div class="actions-container custm-actn-cntnr">
+          <div role="group" aria-label="" class="btn-group">
+            <button type="button" ng-click="offerDetail.editOfferURL()" ng-if="offerDetail.offerData.user.id===offerDetail.user.id || offerDetail.isModrate" class="btn btn-primary brdr-rdus"><i aria-hidden="true" class="fa fa-pencil-square-o">&nbsp;</i>MODIFICA</button>
+            <button type="button" ng-class="(offerDetail.offerData.user.id===offerDetail.user.id || offerDetail.isModrate) ? 'btn btn-primary':'btn btn-primary brdr-rdus'" ng-click="offerDetail.followUser()" ng-if="offerDetail.offerData.user.id!==offerDetail.user.id"><i aria-hidden="true" class="fa fa-envelope-o">&nbsp;<span ng-show="offerDetail.followStatus===true">Utenti Che Segui</span><span ng-show="offerDetail.followStatus!==true">Segui Utente</span></i></button>
+            <button type="button" ng-click="offerDetail.expiredOffer()" ng-if="offerDetail.offerData.user.id!==offerDetail.user.id &amp;&amp; !offerDetail.offerData.markedAsExpired" ng-disabled="{{offerDetail.offerData.expired}}===true" class="btn btn-primary"><i aria-hidden="true" class="fa fa-clock-o">&nbsp;</i>SCADUTA</button>
+            <button type="button" ng-click="offerDetail.isExpired=true;offerDetail.expiredConfirmOffer()" ng-if="offerDetail.offerData.user.id===offerDetail.user.id &amp;&amp; !offerDetail.offerData.markedAsExpired &amp;&amp; !offerDetail.offerData.expired" class="btn btn-primary"><i aria-hidden="true" class="fa fa-clock-o">&nbsp;</i>è scaduta</button>
+            <button type="button" ng-click="offerDetail.isExpired=true;offerDetail.expiredConfirmOffer()" ng-if="offerDetail.offerData.user.id===offerDetail.user.id &amp;&amp; offerDetail.offerData.markedAsExpired" class="btn btn-primary"><i aria-hidden="true" class="fa fa-check-circle-o">&nbsp;</i>Conferma</button>
+            <button type="button" ng-click="offerDetail.isExpired=false;offerDetail.expiredConfirmOffer()" ng-if="offerDetail.offerData.user.id===offerDetail.user.id &amp;&amp; offerDetail.offerData.markedAsExpired" class="btn btn-primary"><i aria-hidden="true" class="fa fa-times-circle-o">&nbsp;</i>Annulla</button>
+            <button type="button" report-spam="" ng-click="offerDetail.reportOffer(offerDetail.offerData);report.openModal()" ng-if="offerDetail.offerData.user.id!==offerDetail.user.id" class="btn btn-primary"><i aria-hidden="true" class="fa fa-exclamation-triangle">&nbsp;</i>SEGNALA/SPAM</button>
+            <button type="button" ng-click="offerDetail.saveOffer()" ng-if="offerDetail.offerData.user.id!==offerDetail.user.id" class="btn btn-primary"><i aria-hidden="true" class="fa fa-star">&nbsp;</i>SALVA OFFERTA</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

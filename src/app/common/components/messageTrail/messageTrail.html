@@ -1,0 +1,42 @@
+
+<div class="thread-item-container container-fluid max-view-width mrgn-btm20">
+  <div class="row">
+    <div ng-if="messageTrail.messageData.userSender.id!==messageTrail.user.id" class="col-sm-2 col-md-2 col-xs-12 thread-item-left-part">
+      <div class="thread-item-poster">
+        <div ng-if="messageTrail.messageData.userSender.urlAvatar != null" class="img-user-avatar"><img ng-src="{{messageTrail.messageData.userSender.urlAvatar}}"/></div>
+        <div ng-if="messageTrail.messageData.userSender.urlAvatar == null" class="img-user-avatar"><img ng-src="{{messageTrail.IMAGES_URLS.DOMAIN}}{{messageTrail.IMAGES_URLS.IMAGES}}icon-nedben-face.png"/></div>
+        <div class="thread-item-user-level">{{messageTrail.messageData.userSender.userLevel.shortDescription}}</div>
+      </div>
+    </div>
+    <div class="col-sm-10 col-md-10 col-xs-12 thread-item-right-part ">
+      <div class="row thread-item-header">
+        <!-- NOME-->
+        <div ng-if="messageTrail.messageData.userSender.id!==messageTrail.user.id" class="col-xs-4 text-left thread-item-username"><strong>{{messageTrail.messageData.userSender.nickname}}</strong></div>
+        <!-- DATA INS-->
+        <div Class="col-xs-8 thread-item-date" ng-if="messageTrail.messageData.userSender.id!==messageTrail.user.id">{{messageTrail.messageData.dateIns | date:'dd.MM.yyyy'}}</div>
+        <div Class="col-xs-8 thread-item-logged-date text-right " ng-if="messageTrail.messageData.userSender.id===messageTrail.user.id">{{messageTrail.messageData.dateIns | date:'dd.MM.yyyy'}}</div>
+        <div ng-if="messageTrail.messageData.userSender.id===messageTrail.user.id" class="col-xs-4 text-right thread-item-logged-username"><strong>{{messageTrail.messageData.userSender.nickname}}</strong></div>
+        <!-- DATA INS-->
+      </div>
+      <div class="row thread-item-content">
+        <!-- TESTO-->
+        <div class="col-xs-12">
+          <div id="taTextElement" ta-bind="ta-bind" ng-model="messageTrail.messageData.message"></div>
+        </div>
+        <!-- BADGES-->
+        <div ng-class="messageTrail.messageData.userSender.id===messageTrail.user.id ? 'bdgs-text-rght' :''" class="col-xs-12">
+          <ul class="list-inline horizontal">
+            <li ng-repeat="badge in messageTrail.messageData.userSender.badgeLevels"><img ng-src="{{messageTrail.IMAGES_URLS.DOMAIN}}{{messageTrail.IMAGES_URLS.BADGES}}{{badge.imgBadgeLevel}}" title="{{badge.badgeLevelName + ' - level ' + badge.level}}" class="img-responsive"/></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div ng-if="messageTrail.messageData.userSender.id===messageTrail.user.id" class="col-sm-2 col-md-2 col-xs-12 custm-thread-item-right-part">
+      <div class="thread-item-logged-poster">
+        <div ng-if="messageTrail.messageData.userSender.urlAvatar != null" class="img-user-avatar"><img ng-src="{{messageTrail.messageData.userSender.urlAvatar}}"/></div>
+        <div ng-if="messageTrail.messageData.userSender.urlAvatar == null" class="img-user-avatar"><img ng-src="{{messageTrail.IMAGES_URLS.DOMAIN}}{{messageTrail.IMAGES_URLS.IMAGES}}icon-nedben-face.png"/></div>
+        <div class="thread-item-user-level">{{messageTrail.messageData.userSender.userLevel.shortDescription}}</div>
+      </div>
+    </div>
+  </div>
+</div>

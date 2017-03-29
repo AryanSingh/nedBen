@@ -1,0 +1,52 @@
+// OFFER 
+div(class="offer offer-{{useroffer.offerData.id}} user-{{useroffer.offerData.user.id}} ", id="offer-{{useroffer.offerData.id}}")
+	div(class="row", style="position:relative;")
+		// SCORE
+		div(class="col-sm-2 col-xs-12 col-md-2")
+			div(class="row offer-rating-container",style="padding-top:0")
+				div(class="offer-rating offer-rating-default custom-offer-desgn", style="background:#2f85c0 !important;")
+					div(class="rating-value", ng-class="(useroffer.offerType==='USERFOLLOW' || useroffer.offerType ==='USERIGNORE')?'postn-image':''")
+						h1(class="text-center",ng-show="useroffer.offerType!=='USERFOLLOW' && useroffer.offerType!=='USERIGNORE'")
+								span(ng-show="useroffer.offerType=='OFFER' || useroffer.offerType=='OFFERSAVE'"){{useroffer.offerData.score}}
+								span(ng-show="useroffer.offerType=='FORUM' || useroffer.offerType=='FORUMSAVE'"){{useroffer.offerData.responses}}
+							div(class="show-name show-name-mobile")
+								div(ng-show="useroffer.offerType==='USERFOLLOW' || useroffer.offerType ==='USERIGNORE'")
+												a(ng-href="#/uprofile/{{useroffer.offerData.user.id}}")
+													img(class="img-responsive img-border", ng-src="{{useroffer.offerData.user.urlAvatar}}")
+						div(class="show-name1")
+								div(ng-show="useroffer.offerType==='USERFOLLOW' || useroffer.offerType ==='USERIGNORE'")
+										a(ng-href="#/uprofile/{{useroffer.offerData.user.id}}")
+											h4(class="clr-change-nm") {{useroffer.offerData.user.nickname | limitTo:11}}
+										h4(class="clr-change") {{useroffer.offerData.user.userLevel.shortDescription}}
+						
+							
+
+
+						div
+							h3(class="text-center")
+									span(ng-show="useroffer.offerType=='OFFER' || useroffer.offerType=='OFFERSAVE'") score
+									span(ng-show="useroffer.offerType=='FORUM' || useroffer.offerType=='FORUMSAVE'") risposte 
+		// OFFER TEXT
+		div(class="col-sm-10 col-xs-12  col-md-10 offer-left-container")
+			div(class="offer-container offer-container-mobile",style="height:10rem;") 
+					div(class="col-sm-9 col-xs-9 message-padding")
+						p(class="description ", ng-show="useroffer.offerType=='OFFER' || useroffer.offerType=='OFFERSAVE'")
+								a(ng-href="#/offerta/{{useroffer.offerData.id}}"){{useroffer.offerData.name}}
+								span() {{'@'+useroffer.offerData.vendor.description}}
+
+						p(class="description ", ng-show="useroffer.offerType=='FORUM' || useroffer.offerType=='FORUMSAVE'")
+							a(ng-href="#/forumdetail/{{useroffer.offerData.id}}", style="text-decoration:none")
+								strong(){{useroffer.offerData.name}}
+								<br>
+								span(){{useroffer.offerData.description |limitTo:250 |htmlToPlaintext}}
+						div(class="profile-badges-container manage-image profile-mobile-margin")
+							div(class="badges-frame", ng-show="useroffer.offerType=='USERFOLLOW' || useroffer.offerType=='USERIGNORE'")
+									ul(class="list-inline horizontal badges-slidee")
+										li(ng-repeat="badge in useroffer.offerData.user.badgeLevels")
+												img(class="img-responsive", ng-src="{{useroffer.IMAGES_URLS.DOMAIN}}{{useroffer.IMAGES_URLS.BADGES}}{{badge.imgBadgeLevel}}",title="{{badge.badgeLevelName + ' - level ' + badge.level}}")								
+					div(class="col-sm-3 col-xs-3 profile-mobile-margin",ng-click="useroffer.removeNotification()", ng-if="useroffer.loggedUserId > 0")
+								div(class="btn pull-right", ng-class="(useroffer.loggedUserId!==useroffer.offerData.user.id && !useroffer.offerData.notifyActiveUserLogged && (useroffer.offerType==='OFFER' || useroffer.offerType==='FORUM')) ||(useroffer.loggedUserId===useroffer.offerData.user.id && !useroffer.offerData.notifyActive && (useroffer.offerType==='OFFER' || useroffer.offerType==='FORUM'))  ? 'btn-deactivate' : 'btn-warning'", ng-if="useroffer.offerType!=='USERFOLLOW' && useroffer.offerType!=='USERIGNORE'")									
+									i(ng-if="(useroffer.offerType==='OFFER' || useroffer.offerType==='FORUM')", class="fa fa-envelope-o", title="clicca qui per attivare/disattivare le notifiche per questo post")
+									i(ng-if="useroffer.offerType!=='OFFER' && useroffer.offerType!=='FORUM'", class="fa fa-trash")
+								div(class="btn btn-warning pull-right", ng-if="useroffer.offerType=='USERFOLLOW' || useroffer.offerType=='USERIGNORE'")
+									i(class="fa fa-trash")

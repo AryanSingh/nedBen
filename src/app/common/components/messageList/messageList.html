@@ -1,0 +1,62 @@
+
+<div class="profile-lists-bar clearfix">
+  <nav style="margin-bottom:0px;" class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid max-view-width">
+      <div class="collapse navbar-collapse padd-spc1 buttn-margin">
+        <div class="col-md-4 col-xs-12 btn-mang">
+          <button ng-click="messageLists.returnPage()" ng-if="messageLists.otherUserId &gt; 0" class="btn btn-primary navbar-btn btn-medium-text pull-left">Ritorna ai messaggi</button>
+          <button ng-click="messageLists.returnPage();" ng-if="messageLists.otherUserId === 0" class="btn btn-primary navbar-btn btn-medium-text pull-left">Ritorna ai messaggi</button>
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <h1 class="most-ln text-center">MESSAGGI</h1>
+        </div>
+        <div ng-if="messageLists.messagesList.length &gt; 0" class="col-md-4 col-xs-12 input-fld">
+          <input type="text" placeholder="Search here" ng-model="messageLists.mysearchinput"/>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+<div ng-show="messageLists.messagesList.length &gt; 0 &amp;&amp; messageLists.showMessageList===true" class="profile-lists-container">
+  <div class="profile-lists-content max-view-width wht-bkgrnd-pddng">
+    <div class="profile-lists offers-list">
+      <div class="profile-lists offers-list-item"> 
+        <div ng-repeat="messageObj in messageLists.messagesList| filter:messageLists.mysearchinput" id="offer-{{$index}}" class="offer">
+          <div style="position:relative;margin-bottom: 1rem; " class="row">
+            <div style="padding-left:0px;" class="col-sm-3 col-md-2 col-xs-12 custom-padding mobile-screen-width ">
+              <div ng-class="messageObj.read===true?'thread-item-poster':'thread-item-unread-poster'" style="padding-top:0; border-right-style: none;">	
+                <div class="postn-image">
+                  <div style="width: initial; margin-right: 10px;" class="show-name-agn"><a ng-href="#/uprofile/{{messageObj.otherUser.id}}">
+                      <div class="img-user-avatar1">																<img ng-src="{{messageLists.IMAGES_URLS.DOMAIN}}{{messageLists.IMAGES_URLS.IMAGES}}icon-nedben-face.png" ng-if="!messageObj.otherUser.urlAvatar"/><img ng-src="{{messageObj.otherUser.urlAvatar}}" ng-if="messageObj.otherUser.urlAvatar"/></div></a></div>
+                  <div style="float: none;margin-top: 20px;" class="show-name1"><a ng-href="#/uprofile/{{messageObj.otherUser.id}}">	 
+                      <h4 class="clr-messege-nm">{{messageObj.otherUser.nickname | limitTo:11}}</h4></a>
+                    <h4 class="clr-messege">{{messageObj.otherUser.userLevel.shortDescription}}</h4>
+                  </div>
+                </div>
+                <div class="message-count">
+                  <div ng-class="messageObj.read===true?'round-read':'round-unread'">			<span class="numbr-messege">{{messageObj.otherUser.unreadMessages}}									</span></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding-left:0px;" class="col-sm-9 col-md-10 col-xs-12">												
+              <div class="profile-badges"> 
+                <div class="offer-left-container">															
+                  <div style="height:10rem;padding:10px; padding-top:10px;background:#fff;border-radius:0px;" class="offer-container  ">																
+                    <div class="col-md-10 col-xs-8 "><span ta-bind="ta-bind" ng-model="messageObj.message" class="messge-obj">	</span></div>
+                    <div style="padding-top:20px;" class="col-md-2 col-xs-4">
+                      <button ng-click="messageLists.replyMessage(messageObj)" class="btn btn-warning">VAL </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-show="messageLists.showMessageList===false || messageLists.otherUserId &gt; 0">
+  <message-form reciver-user="messageLists.userReciver" class="clearfix"></message-form>
+  <message-trail ng-repeat="trailObj in messageLists.messageTrail | filter:messageLists.mysearchinput" message-data="trailObj" ng-if="messageLists.messageTrail.length &gt; 0" class="clearfix"></message-trail>
+</div>

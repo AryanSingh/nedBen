@@ -1,0 +1,54 @@
+
+<div class="profile-lists-bar clearfix">
+  <nav style="margin-bottom:0px;" class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid ">
+      <div class="max-view-width pdng-left"> 
+        <div class="collapse navbar-collapse padd-spc ">		
+          <ul class="nav navbar-nav navbar-left ul-margin">
+            <li> <span class="most-ln">MOSTRA : </span></li>
+            <li><a href="javascript:void(0)" ng-click="profileLists.currentTab=1;profileLists.resetValues()" class="btn btn-primary">LE TUE OFFERTE<span class="badge">{{profileLists.profileData.offersCreated.length}}</span></a></li>
+            <li><a href="javascript:void(0)" ng-click="profileLists.currentTab=2;profileLists.resetValues()" class="btn btn-primary">I TUOI CONSIGLI<span class="badge">{{profileLists.profileData.forumsCreated.length}}</span></a></li>
+            <li><a href="javascript:void(0)" ng-click="profileLists.currentTab=6;profileLists.resetValues()" ng-if="profileLists.userId==profileLists.user.id" class="btn btn-primary">UTENTI CHE IGNORI<span class="badge">{{profileLists.profileData.usersIgnored.length}}</span></a></li>
+            <li><a href="javascript:void(0)" ng-click="profileLists.currentTab=3;profileLists.resetValues()" ng-if="profileLists.userId==profileLists.user.id" class="btn btn-primary">UTENTI CHE SEGUI<span class="badge">{{profileLists.profileData.usersFollowed.length}}</span></a></li>
+            <li><a href="javascript:void(0)" ng-click="profileLists.currentTab=4;profileLists.resetValues()" ng-if="profileLists.userId==profileLists.user.id" class="btn btn-primary">OFFERTE SALVATE<span class="badge">{{profileLists.profileData.offersSaved.length}}</span></a></li>
+            <li><a href="javascript:void(0)" ng-click="profileLists.currentTab=5;profileLists.resetValues()" ng-if="profileLists.userId==profileLists.user.id" class="btn btn-primary">CONSIGLI SALVATI<span class="badge">{{profileLists.profileData.forumsSaved.length}}</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+<div ng-init="profileLists.currentTab=1" infinite-scroll="profileLists.getList()" infinite-scroll-distance="1" class="profile-lists-container ">
+  <div class="profile-lists-content max-view-width">
+    <div ng-if="profileLists.currentTab == 1" class="profile-lists offers-list">
+      <div class="profile-lists offers-list-item wht-bkgrnd-pddng">
+        <useroffer ng-repeat="offer in profileLists.tepmpArr" offer-object="{'x':offer,'type':'OFFER'}"></useroffer>
+      </div>
+    </div>
+    <div ng-if="profileLists.currentTab == 2" class="profile-lists advices-list">
+      <div class="profile-lists advices-list-item wht-bkgrnd-pddng">
+        <useroffer ng-repeat="forumsObj in profileLists.tepmpArr" offer-object="{'x':forumsObj,'type':'FORUM'}"></useroffer>
+      </div>
+    </div>
+    <div ng-if="profileLists.currentTab == 6" class="profile-lists following-list">
+      <div class="profile-lists following-list-item wht-bkgrnd-pddng">
+        <useroffer ng-repeat="userUnFollowObj in profileLists.tepmpArr" offer-object="{'x':userUnFollowObj,'type':'USERIGNORE'}"></useroffer>
+      </div>
+    </div>
+    <div ng-if="profileLists.currentTab == 3" class="profile-lists following-list">
+      <div class="profile-lists following-list-item wht-bkgrnd-pddng">
+        <useroffer ng-repeat="userFollowObj in profileLists.tepmpArr" offer-object="{'x':userFollowObj,'type':'USERFOLLOW'}"></useroffer>
+      </div>
+    </div>
+    <div ng-if="profileLists.currentTab == 4" class="profile-lists saved-offers-list">
+      <div class="profile-lists saved-offers-list-item wht-bkgrnd-pddng">
+        <useroffer ng-repeat="savedOfferObj in profileLists.tepmpArr" offer-object="{'x':savedOfferObj,'type':'OFFERSAVE'}"></useroffer>
+      </div>
+    </div>
+    <div ng-if="profileLists.currentTab == 5" class="profile-lists saved-advices-list">
+      <div class="profile-lists saved-advices-list-item wht-bkgrnd-pddng">
+        <useroffer ng-repeat="savedAdviceObj in profileLists.tepmpArr" offer-object="{'x':savedAdviceObj,'type':'FORUMSAVE'}"></useroffer>
+      </div>
+    </div>
+  </div>
+</div>
