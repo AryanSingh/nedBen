@@ -1,0 +1,6 @@
+<!-- OFFER LIST -->
+<div class="row">
+  <div infinite-scroll="adviceList.getList()" infinite-scroll-distance="1" infinite-scroll-disabled="adviceList.scrollStatus" class="col-md-offset-1 col-md-10 wht-bkgrnd">
+    <advice ng-repeat="item in adviceList.list" advice-id="item"></advice>
+  </div>
+</div>
