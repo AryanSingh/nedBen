@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { ENV, 'OFFER_MANAGEMENT_URLS','IMAGES_URLS'}  from '../../../app.constant';
+import { ENV, OFFER_MANAGEMENT_URLS,IMAGES_URLS}  from '../../../app.constant';
 import { SessionService } from '../common/sessionService';
 
 @Component({
@@ -10,8 +10,6 @@ import { SessionService } from '../common/sessionService';
 })
 export class OfferComponent implements OnInit {
     private ENV:any;
-	private OFFER_MANAGEMENT_URLS:any;
-	private IMAGES_URLS:any;
 	private offerId:number;
 	private offerData:any;
 	private daysFrom:number;
@@ -19,6 +17,9 @@ export class OfferComponent implements OnInit {
 	private Socialshare:any;
 	private isHttpReq:boolean = true;
 	private loggedUserId:number=0;
+	private IMAGES_URLS:any;
+	private OFFER_MANAGEMENT_URLS:any;
+	
 
     constructor(
         private http: Http,
@@ -39,7 +40,7 @@ export class OfferComponent implements OnInit {
     }
     getOfferDetail() {
 			this.loading = true;
-			this.$http.post(this.ENV.apiBasePath + this.OFFER_MANAGEMENT_URLS.GET_DETAIL, {
+			this.http.post(this.ENV.apiBasePath + this.OFFER_MANAGEMENT_URLS.GET_DETAIL, {
 				idOffer: this.offerId,
 				idLoggedUser: this.session.getUserId(),
 			}, {})

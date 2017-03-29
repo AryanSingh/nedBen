@@ -1,0 +1,77 @@
+
+<!-- ADVICE DETAIL-->
+<div ng-show="adviceDetail.pageLoadStatus==true">	
+  <div ng-if="adviceDetail.forumData" ng-class="adviceDetail.forumData ? 'forumIdmdetailbkgrund' : ''" class="offer-detail">
+    <div class="row">
+      <div class="col-md-9">
+        <section class="offer-detail-header1 custm-detail-header">
+          <h1>{{adviceDetail.forumData.name}}</h1>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <section class="offer-detail-info">						
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row mg-l-0 mg-rgt-0">
+                <div style="padding-top: 1.5rem;" class="col-md-1 col-sm-1 text-center">
+                  <section class="offer-score">
+                    <div class="row offer-rating-container">
+                      <div class="offer-rating offer-rating-form ">
+                        <div class="rating-value">
+                          <h1 class="text-center">{{adviceDetail.forumData.responses}}</h1>
+                          <div>
+                            <h3 class="text-center">RISPOSTE</h3>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                  <section class="profile-resume clearfix">
+                    <div class="col-md-5 col-xs-5 col-sm-5 "><a href="#/uprofile/{{adviceDetail.forumData.user.id}}" class="profile-name">
+                        <div ng-if="adviceDetail.forumData.user.urlAvatar===null" class="profile-image-new"><img ng-src="assets/images/icon-nedben-face.png"/></div>
+                        <div ng-if="adviceDetail.forumData.user.urlAvatar!=null" class="profile-image-new"><img ng-src="{{adviceDetail.forumData.user.urlAvatar}}"/></div></a></div>
+                    <div class="col-md-7 col-xs-7 col-sm-7">
+                      <p class="nick-name"><a ng-href="#/uprofile/{{adviceDetail.forumData.user.id}}">{{adviceDetail.forumData.user.nickname}}</a></p>
+                      <p class="profile-created1">Creato {{adviceDetail.daysFrom}} giorni fa.</p>
+                      <p class="profile-level1">Liv. {{adviceDetail.forumData.user.userLevel.idUserLevel}}</p>
+                    </div>
+                  </section>
+                </div>
+                <div ng-show="adviceDetail.forumData.user.badgeLevels.length &gt; 0" class="col-md-8 col-sm-8 col-xs-12 pad-l-0 pad-r-0 mg-l-neg-2 bdge-margin-left-0px">
+                  <div class="profile-badges-container ">
+                    <button class="prev"><i class="glyphicon glyphicon-chevron-left "></i></button>
+                    <button class="next"><i class="glyphicon glyphicon-chevron-right "></i></button>
+                    <div class="badges-frame">
+                      <ul class="list-inline horizontal badges-slidee">
+                        <li sly-horizontal-repeat="sly-horizontal-repeat" sly-options="{easing: 'swing'}" ng-repeat="badge in adviceDetail.forumData.user.badgeLevels"><img ng-src="{{adviceDetail.IMAGES_URLS.DOMAIN}}{{adviceDetail.IMAGES_URLS.BADGES}}{{badge.imgBadgeLevel}}" title="{{badge.badgeLevelName + ' - level ' + badge.level}}" class="img-responsive"/></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mg-l-0 bg-col-white offer-full-description">
+                <div class="col-md-10 col-md-offset-1">
+                  <section class="offer-detail-content">
+                    <p ng-bind-html="adviceDetail.forumData.description"></p>
+                    <div class="actions-container custm-actn-cntnr">
+                      <div role="group" aria-label="" class="btn-group">
+                        <button type="button" ng-if="adviceDetail.forumData.user.id===adviceDetail.user.id || adviceDetail.isModrate" ng-click="adviceDetail.editForumURL()" class="btn btn-primary brdr-rdus"><i aria-hidden="true" class="fa fa-pencil-square-o">&nbsp;</i>MODIFICA</button>
+                        <button type="button" ng-class="(adviceDetail.forumData.user.id===adviceDetail.user.id || adviceDetail.isModrate) ? 'btn btn-primary':'btn btn-primary brdr-rdus'" ng-click="adviceDetail.followUser()" ng-show="adviceDetail.forumData.user.id!==adviceDetail.user.id"><i aria-hidden="true" class="fa fa-envelope-o">&nbsp;<span ng-show="adviceDetail.followStatus===true">UTENTI CHE SEGUI</span><span ng-show="adviceDetail.followStatus!==true">SEGUI UTENTE</span></i></button>
+                        <button type="button" report-spam="" ng-click="adviceDetail.reportOffer(adviceDetail.forumData);report.openModal()" ng-if="adviceDetail.forumData.user.id!==adviceDetail.user.id" class="btn btn-primary"><i aria-hidden="true" class="fa fa-exclamation-triangle">&nbsp;</i>SEGNALA/SPAM</button>
+                        <button type="button" ng-click="adviceDetail.saveForum()" ng-if="adviceDetail.forumData.user.id!==adviceDetail.user.id" class="btn btn-primary"><i aria-hidden="true" class="fa fa-star">&nbsp;</i>CONSIGLI SALVATI</button>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<!-- OFFER -->
+<div class="offer advice">
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="row offer-rating-container">
+        <div class="custm-offer-rating custm-offer-rating-default">
+          <div class="custm-rating-value">
+            <h1 class="text-center">{{advice.adviceData.responses}}</h1>
+            <p class="text-center">RISPOSTE</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10 offer-left-container">
+      <div class="custtm-offer-container">
+        <h3><a href="#/forumcategory/{{advice.adviceData.category.idCategory}}" class="category-label"><span>{{advice.adviceData.category.descCategory}}</span></a><a ng-href="#/forumdetail/{{advice.adviceData.id}}"><span>{{advice.adviceData.name | limitTo : 50}}</span><span ng-show="advice.adviceData.name.length &gt; 50">..			</span></a></h3>
+        <div style="position:relative;" class="row"><a ng-href="#/forumdetail/{{advice.adviceData.id}}" style="color:#333333;font-size: 1.4rem;">
+            <div class="col-sm-9 col-xs-12 custm-pddng">										
+              <p class="description">{{advice.adviceData.description | limitTo:170 |htmlToPlaintext}}<span ng-if="advice.adviceData.description.length &gt; 255">...<a ng-href="#/forumdetail/{{advice.adviceData.id}}#commentBlock" class="hover-color"><span class="comments"> {{advice.adviceData.responses}} Commenti</span></a></span></p>
+              <div class="offer-info forum-nedben-icon"><a href="#/uprofile/{{advice.adviceData.user.id}}"><img ng-src="assets/images/icon-nedben-face.png" ng-if="!advice.adviceData.user.urlAvatar" height="36" width="45" class="nedben-icon"/><img ng-src="{{advice.adviceData.user.urlAvatar}}" ng-if="advice.adviceData.user.urlAvatar" height="36" width="45" class="nedben-icon"/><a href="#/uprofile/{{advice.adviceData.user.id}}" class="hover-color"><span class="offer-user">{{advice.adviceData.user.nickname}}</span></a><span class="offer-created">Creato {{advice.adviceData.dateIns}}</span></a></div>
+            </div>
+            <div ng-if="advice.adviceData.superForum" class="col-sm-3 col-xs-12">
+              <div class="custm-social-image-form"><img ng-src="assets/images/formimg.png"/></div>
+            </div></a></div>
+      </div>
+    </div>
+  </div>
+</div>
