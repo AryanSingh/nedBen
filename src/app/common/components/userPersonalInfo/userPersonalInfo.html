@@ -1,0 +1,13 @@
+
+<div class="col-md-3">
+  <div class="panel panel-info">
+    <div class="panel-heading hdng-bkgrund">
+      <h3 id="{{personalInfoCtrl.infoType}}" class="panel-title text-center">{{personalInfoCtrl.userPersonalData[0].descPersonalInfoType}}</h3>
+    </div>
+    <div style="padding:5px;" class="panel-body">
+      <ul style="height:20rem;overflow:scroll;overflow-x: hidden;padding-left:0px !important;scrollbar-face-color :#a5c4cd;" class="setting-list setting-offer-list">
+        <li ng-repeat="personalObj in personalInfoCtrl.userPersonalData" ng-class="personalObj.enabled===true? 'selected' : ''" ng-click="personalInfoCtrl.updatePersonalInfo(personalObj)">{{personalObj.descPersonalInfo}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

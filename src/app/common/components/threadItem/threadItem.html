@@ -1,0 +1,62 @@
+
+<div class="thread-item-container container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-md-2 col-sm-2 thread-item-left-part">
+      <div ng-class="threadItem.threadData.user.id===threadItem.user.id ? 'thread-item-logged-poster' : 'thread-item-poster'"><a href="#/uprofile/{{threadItem.threadData.user.id}}">
+          <div ng-if="threadItem.threadData.user.urlAvatar != null" class="img-user-avatar"><img ng-src="{{threadItem.threadData.user.urlAvatar}}"/></div>
+          <div ng-if="threadItem.threadData.user.urlAvatar == null" class="img-user-avatar"><img ng-src="{{threadItem.IMAGES_URLS.DOMAIN}}{{threadItem.IMAGES_URLS.IMAGES}}icon-nedben-face.png"/></div></a>
+        <div class="thread-item-user-level">{{threadItem.threadData.user.userLevel.shortDescription}}</div>
+      </div>
+    </div>
+    <div ng-class="threadItem.showSubthread===true ? 'custom-margin-add' : 'custom-margin-remove'" class="col-xs-12 col-md-10  col-sm-10 thread-item-right-part">
+      <div class="row thread-item-header">
+        <!-- NOME-->
+        <div ng-class="threadItem.threadData.user.id===threadItem.user.id ? 'thread-item-logged-username' : 'thread-item-username'" class="col-xs-6 col-md-3 col-sm-3 text-left"><a href="#/uprofile/{{threadItem.threadData.user.id}}"><strong>{{threadItem.threadData.user.nickname}}</strong></a></div>
+        <!-- DATA INS-->
+        <div Class="col-xs-6 col-md-9 col-sm-9 brd-chk" ng-class="threadItem.threadData.user.id===threadItem.user.id ? 'thread-item-logged-date' : 'thread-item-date'">{{threadItem.threadData.date}}</div>
+      </div>
+      <div class="row thread-item-content">
+        <!-- TESTO-->
+        <!-- BADGES-->
+        <div class="col-sm-9 col-xs-12">
+          <div id="taTextElement" ta-bind="text" ng-model="threadItem.threadData.text "></div>
+          <ul class="list-inline horizontal">
+            <li ng-repeat="badge in threadItem.threadData.user.badgeLevels"><img ng-src="{{threadItem.IMAGES_URLS.DOMAIN}}{{threadItem.IMAGES_URLS.BADGES}}{{badge.imgBadgeLevel}}" title="{{badge.badgeLevelName + ' - level ' + badge.level}}" class="img-responsive"/></li>
+          </ul>
+        </div>
+        <div style="padding-right:0px;" ng-if="threadItem.threadType!='OFFER' &amp;&amp; threadItem.forumDeatil.idThreadBest===threadItem.threadData.idThread" class="col-sm-3 col-xs-12">
+          <div class="custm-social-image-form"><img ng-src="assets/images/formimg.png"/></div>
+        </div>
+        <!-- ACTIONS-->
+        <div class="col-xs-12 thread-item-actions">
+          <div ng-class="{'width-full': threadItem.showResponseForm === true, 'width-zero': threadItem.showResponseForm === false}" class="thread-item-response">
+            <div class="thread-item-response-form">
+              <comment-form id-offer="threadItem.threadData.idOffer" thread-data="threadItem.threadData" thread-type="threadItem.threadType" comment-type="threadItem.commentType" class="clearfix"></comment-form>
+            </div>
+          </div>
+          <div ng-class="{'width-zero': threadItem.showResponseForm === true, 'width-full': threadItem.showResponseForm === false}" class="thread-item-buttons">
+            <button ng-click="threadItem.toggleResponseForm();threadItem.commentType='NEW'" ng-if="threadItem.threadData.idThreadFather===0" class="btn btn-sm btn-primary btn-highlight">Rispondi</button>
+            <button ng-class="threadItem.threadData.likeLogged!==0?'active':''" ng-click="threadItem.likeThread(threadItem.threadData)" ng-disabled="threadItem.threadData.user.id===threadItem.user.id" class="btn btn-sm btn-primary">Like ({{threadItem.threadData.totLikes}})</button>
+            <button report-spam="" ng-click="threadItem.reportThread(threadItem.threadData);report.openModal()" ng-if="threadItem.threadData.user.id!==threadItem.user.id" class="btn btn-sm btn-primary">Segnala</button>
+            <button ng-click="threadItem.updateCommnt(threadItem.threadData.text);threadItem.toggleResponseForm();threadItem.commentType='UPDATE'" ng-if="threadItem.threadData.user.id===threadItem.user.id || threadItem.isModrate" class="btn btn-sm btn-primary">Modifica</button>
+            <button ng-click="threadItem.bestMarked(threadItem.threadData);" ng-if="threadItem.forumDeatil.user.id===threadItem.user.id &amp;&amp; threadItem.threadData.user.id!==threadItem.user.id &amp;&amp; threadItem.threadType!='OFFER' &amp;&amp; threadItem.threadData.idThreadFather ===0 &amp;&amp; threadItem.forumDeatil.idThreadBest===0" class="btn btn-sm btn-primary">Risp. migliore</button>
+          </div>
+        </div>
+        <!-- DATA INS-->
+      </div>
+    </div>
+  </div>
+  <div class="row custm-mrgn-btm-3">
+    <div ng-if="threadItem.threadData.subThreadNumber &gt;0 &amp;&amp; threadItem.threadData.idThreadFather ===0 &amp;&amp; !threadItem.showSubthread" ng-click="threadItem.getReplies();threadItem.showSubthreadFun()" class="col-xs-12 col-md-offset-2 col-md-10 col-sm-offset-2 col-sm-10 ">
+      <button class="thread-button"><i class="fa fa-reply fa-rotate-180 text-color"> </i><span class="text-color">{{threadItem.threadData.subThreadNumber}} risposte </span>
+      </button>
+    </div>
+  </div>
+  <!-- RISPOSTE AL COMMENTO-->
+  <div ng-if="threadItem.showSubthread" class="row thread-item-body">		
+    <div class="col-xs-12 col-md-offset-2 col-md-10 col-sm-offset-2 col-sm-10">			
+      <thread-item ng-repeat="reply in threadItem.replies" thread-data="reply" is-reply="true" thread-type="threadItem.threadType">				</thread-item>
+    </div>
+    <div style="margin-bottom:1rem;margin-top:-2rem;" class="col-xs-12 col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4 text-right">					<a ng-click="threadItem.getReplies()" ng-if="threadItem.threadData.subThreadNumber!=0 &amp;&amp; threadItem.threadData.subThreadNumber!==threadItem.replies.length" class="btn btn-primary custm-butn-set">mostra altro</a></div>
+  </div>
+</div>

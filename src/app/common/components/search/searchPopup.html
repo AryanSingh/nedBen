@@ -1,0 +1,9 @@
+
+<div ng-style="{top: position().top+'px', left: position().left+'px'}" style="display: block;" ng-show="isOpen() &amp;&amp; !moveInProgress" aria-hidden="{{!isOpen()}}" ng-class="{'open': isOpen()}" class="custom-popup-wrapper">
+  <ul role="listbox" style="width: 100%;z-index: 999999;" class="dropdown-menu">
+    <li ng-show="matches[0].model.offerResults.length === 0"><a><span>Non sono state trovate offerte...</span></a></li>
+    <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.model.id}}">
+      <div uib-typeahead-match="uib-typeahead-match" index="$index" match="match.model" query="query" template-url="templateUrl"></div>
+    </li>
+  </ul>
+</div>

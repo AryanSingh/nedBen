@@ -1,0 +1,15 @@
+
+<uib-carousel id="carousel-example-generic" interval="slider.myInterval">
+  <uib-slide ng-repeat="offer in slider.offers track by $index" index="$index"><a ng-href="#/offerta/{{offer.id}}">
+      <div style="background-image:url('{{offer.imgUrl}}')" class="carousel-img-container"></div>
+      <div style="background-image:url('assets/images/scaduta.png'); background-color:transparent;height:166px !important" ng-if="offer.expired" class="carousel-img-container ovrlap-img-pos"></div>
+      <div class="carousel-caption">
+        <div class="caption-title clearfix"><a ng-href="#/offerta/{{offer.id}}">
+            <h3>{{offer.name}}</h3></a>
+          <h3 class="caption-title-price"> {{offer.price}}€</h3>
+        </div>
+        <p class="caption-description">{{offer.description | limitTo : 200 | htmlToPlaintext }}<span ng-show="offer.description.length &gt; 320">...</span><span class="caption-comments"><a ng-href="#/offerta/{{offer.id}}#commentBlock">{{offer.commentsNumber}} Commenti      </a></span></p><img src="assets/images/icon-upvote.png" class="offer-power-img"/>
+        <div class="offer-power"> <span>{{offer.score}}</span></div>
+        <div class="offer-command"><a ng-href="{{offer.url}}" rel="nofollow" target="_blank" class="btn btn-danger btn-round btn-flat-danger btn-medium-text caption-button">Vai all'offerta</a></div>
+      </div></a></uib-slide>
+</uib-carousel>

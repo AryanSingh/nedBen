@@ -1,0 +1,13 @@
+
+<form class="navbar-form navbar-left">
+  <div class="input-group">
+    <div class="input-group-btn">
+      <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-single">{{ search.categorySelected.descCategory ? search.categorySelected.descCategory : 'Categoria' }} <span class="caret"></span></button>
+      <ul class="dropdown-menu categories-menu">
+        <li ng-repeat="category in search.categories"><a ng-click="search.filterCateogory(category)">{{category.descCategory}}      </a></li>
+      </ul>
+    </div>
+    <input type="text" id="search" placeholder="Ricerca" name="search" ng-model="search.search" uib-typeahead="item for item in search.userSearch($viewValue)" typeahead-append-to-body="true" typeahead-loading="search.loadingLocations" typeahead-min-length="3" typeahead-no-results="search.noResults" typeahead-focus-first="false" typeahead-on-select="search.openOffer($item, $model, $label, $event)" ng-keypress="search.shouldSelect($event)" class="form-control"/>
+    <div class="input-group-addon"><span class="nedben-glyph-search"></span></div>
+  </div><i ng-show="search.loadingLocations" class="fa fa-spinner fa-rotate search-loading"></i>
+</form>
