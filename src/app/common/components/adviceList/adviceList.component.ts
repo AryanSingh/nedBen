@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ADVICE_MANAGEMENT_URLS, ENV}  from '../../../app.constant';
 import { $WebSocket } from 'angular2-websocket/angular2-websocket';
-import { SessionService } from '../common/sessionService';
+import { SessionService } from '../../sessionService';
 
 @Component({
   selector: 'adviceList',

@@ -22,8 +22,6 @@ export class FooterComponent implements OnInit {
         this.ENV = ENV;
         this.THREAD_MANAGEMENT_URLS = THREAD_MANAGEMENT_URLS;
     }
-
-    
 }
 
  
