@@ -1,6 +1,40 @@
-/**
-	* Created by Hyperlink on 04/04/16.
-	*/
+import { Component, Input, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
+import { ENV, USER_MANAGEMENT, AUTHURLS }  from '../../../app.constant';
+import { SessionService } from '../../sessionService';
+
+@Component({
+  selector: 'profileAvatar',
+  templateUrl: './profileAvatar.html',
+  styleUrls: ['./profileAvatar.scss']
+})
+export class ProfileAvatarComponent implements OnInit {
+    
+	private FileUploader:any;
+	private ENV:any;
+	private USER_MANAGEMENT:any;
+	private AUTHURLS:any;
+	private user:any;
+	private savedAvatar:any;
+	private currentUser:any;
+	private formdata:any;
+	private imageSource:any;
+	private uploadImageURL:any;
+	private myCroppedImage:any;
+
+    constructor(
+        private http: Http,
+        private session: SessionService 
+    ){};
+
+    ngOnInit(): void {
+        
+		this.AUTHURLS=AUTHURLS;
+		this.ENV = ENV;      
+		this.USER_MANAGEMENT=USER_MANAGEMENT;
+		this.user=this.session.getUserFullDeatil();
+		this.currentUser=this.session.getUserData() ? this.session.getUserData() : {};
+}
 	module nedben.directives.ProfileAvatarDirective {
 			'use strict';
 			class ProfileAvatarDirective implements ng.IDirective {
