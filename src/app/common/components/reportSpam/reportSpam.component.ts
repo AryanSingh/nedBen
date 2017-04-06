@@ -1,6 +1,170 @@
-/**
- * Created by Hyperlink on 04/04/16.
- */
+import { Component, Input, OnInit } from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import { AUTHURLS, ENV, GENERICS, REPORT_ABUSE_URLS }  from '../../../app.constant';
+import { SessionService } from '../../sessionService';
+
+@Component({
+  selector: 'reportSpam',
+  templateUrl: './reportSpam.html',
+  styleUrls: ['./reportSpam.scss']
+})
+export class ReportSpamComponent implements OnInit {
+	private AUTHURLS:any;
+	private ENV:any;
+	private GENERICS:any;
+	private REPORT_ABUSE_URLS:any;
+	private error:boolean = false;
+	private reportType:any;
+	private reportObject:any;
+	private user:any;
+	private report:any;
+	private reportTypeList:any;
+	private errorMessage:string;
+
+    constructor(
+        private http: Http,
+        private session: SessionService 
+    ){};
+
+    ngOnInit(): void {
+		this.AUTHURLS = AUTHURLS;
+		this.ENV = ENV;
+		this.GENERICS=GENERICS;
+		this.REPORT_ABUSE_URLS=REPORT_ABUSE_URLS;
+		this.reportType=window.localStorage.getItem('reportType');
+		this.reportObject=JSON.parse(window.localStorage.getItem('reportObj'));
+		 console.log(this.reportObject,'report object');
+		this.getReportType();
+    }
+
+    reportAbuse(){
+		 if(this.session.getUserData()){
+			 let postData={
+				 idUserReporter:this.user.id,
+				 reportType:this.reportTypeList[this.report.reportType],
+				 message:this.report.comment
+			 };
+			 if(this.reportType==='THREAD'){
+				 postData['idThread']=this.reportObject.idThread;
+				 let headers = new Headers();
+        		 headers.append('Content-Type': 'application/json');
+				 this.http.put(this.ENV.apiBasePath+this.REPORT_ABUSE_URLS.REPORT_THREAD,postData
+					 ,headers)
+				 .subscribe(
+				 	(data)=>{
+					 // toastr.success('Il tuo commento verrà inviata ..');
+					 this.close();
+				 	},
+				 	(err)=>{
+						// toastr.error('<p><strong>'+err.errorMessage+'</strong></p>');
+					});
+			 } else if(this.reportType==='USER'){
+				 postData['idUser']=this.reportObject.user.id;
+				 let headers = new Headers();
+        		 headers.append('Content-Type': 'application/json');
+				 this.http.post(this.ENV.apiBasePath+this.REPORT_ABUSE_URLS.REPORT_USER,postData
+					 ,headers)
+				 .subscribe(
+				 	(data)=>{
+						// toastr.success('Il tuo commento verrà inviata ..');
+						this.close();
+					},
+				 	(err)=>{
+						// toastr.error('<p><strong>'+err.errorMessage+'</strong></p>');
+					});
+
+			 } else if(this.reportType==='OFFER'){
+				 postData['idOffer']=this.reportObject.id;
+				 let headers = new Headers();
+        		 headers.append('Content-Type': 'application/json');
+				 this.http.put(this.ENV.apiBasePath+this.REPORT_ABUSE_URLS.REPORT_OFFER,postData
+					 ,headers)
+				 .subscribe(
+				 	(data)=>{
+						// toastr.success('Il tuo commento verrà inviata ..');
+						this.close();
+				 	},
+				 	(err)=>{
+						// toastr.error('<p><strong>'+err.errorMessage+'</strong></p>');
+					});
+
+			 } else if(this.reportType==='FORUM'){
+				 postData['idForum']=this.reportObject.id;
+				 let headers = new Headers();
+        		 headers.append('Content-Type': 'application/json');
+				 this.http.put(this.ENV.apiBasePath+this.REPORT_ABUSE_URLS.REPORT_FORUM,postData
+					 ,headers)
+				 .subscribe(
+				 	(data)=>{
+						// toastr.success('Il tuo commento verrà inviata ..');
+					this.close();
+				 	},
+					(err)=>{
+						// toastr.error('<p><strong>'+err.errorMessage+'</strong></p>');
+					});
+
+			 }else{
+				// toastr.warning('Selezione non valida per il rapporto.');
+			 }
+
+		 }else{
+			 // this.rootScope.$broadcast('Auth-openModal');
+		 }
+
+	 }
+
+	getReportType(){       
+		if(this.reportType==='THREAD'){
+			this.http.get(this.ENV.apiBasePath+this.GENERICS.GET_REPORT_TYPE_THREAD,{})
+			 .subscribe((data)=>{
+				 this.reportTypeList=data;
+			 },
+			 (err)=>{
+				console.log(err);
+			 });
+		} else if(this.reportType==='USER'){
+			 this.http.get(this.ENV.apiBasePath+this.GENERICS.GET_REPORT_TYPE_USER,{})
+			 .subscribe((data)=>{
+				 this.reportTypeList=data;
+			 },
+			 (err)=>{
+				 console.log(err);
+			 });
+
+		} else if(this.reportType==='OFFER'){
+			 this.http.get(this.ENV.apiBasePath+this.GENERICS.GET_REPORT_TYPE_OFFER,{})
+			 .subscribe((data)=>{
+				 this.reportTypeList=data;
+			 },
+			 (err)=>{
+				 console.log(err);
+			 });
+
+		} else if(this.reportType==='FORUM'){
+			 this.http.get(this.ENV.apiBasePath+this.GENERICS.GET_REPORT_TYPE_FORUM,{})
+			 .subscribe((data)=>{
+				 this.reportTypeList=data;
+			 },
+			 (err)=>{
+				 console.log(err);
+			 });
+
+		}else{
+			// toastr.warning('Selezione non valida per il rapporto.');
+		}
+
+	}
+	close() {
+		 // this.$uibModalInstance.dismiss('close modal');
+	}
+}
+
+// Problem: More than One elements need to be created
+
+ 
+
+
+
  module nedben.directives.ReportSpamDirective {
 	 'use strict';
 	 class ReportSpamDirective implements ng.IDirective {
