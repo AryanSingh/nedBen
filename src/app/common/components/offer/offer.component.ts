@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ENV, OFFER_MANAGEMENT_URLS,IMAGES_URLS}  from '../../../app.constant';
-import { SessionService } from '../common/sessionService';
+import { SessionService } from '../../sessionService';
 
 @Component({
   selector: 'offer',
@@ -34,7 +34,7 @@ export class OfferComponent implements OnInit {
 		this.loggedUserId= this.session.getUserData() ? this.session.getUserData().id : 0;   
 		this.loading = true;
 		if(window.localStorage.getItem('searchType')==='FORUM'){
-			this.$rootScope.$broadcast('search-type','OFFER'); 
+			// this.$rootScope.$broadcast('search-type','OFFER'); 
 		}     
 		this.getOfferDetail();
     }
@@ -55,21 +55,21 @@ export class OfferComponent implements OnInit {
 					this.loading = false;
 				},
 				err => {
-					this.loadingg = false;
+					this.loading = false;
 					this.offerData = false;
 				}
 			)
 		}
 		rateOffer(rate) {
 			if (this.offerData.rateUserLogged !== 0) {
-				toastr.info('Hai già votato questa offerta!');
+				// toastr.info('Hai già votato questa offerta!');
 				return false;
 			}
 			if(this.isHttpReq){
 				if(this.loggedUserId > 0){
 					this.isHttpReq=false;
 					if(this.session.getUserData().id===this.offerData.user.id){
-						toastr.warning('Non puoi votare post creati da te!');
+						// toastr.warning('Non puoi votare post creati da te!');
 						return false;
 					}else {
 						this.http.put(this.ENV.apiBasePath + this.OFFER_MANAGEMENT_URLS.RATE, {
@@ -80,11 +80,13 @@ export class OfferComponent implements OnInit {
 						.map(res => res.json())
 						.subscribe(
 							(data) => {
-								toastr.success('Voto registrato con successo!');
+								// toastr.success('Voto registrato con successo!');
 								this.getOfferDetail();
 								this.isHttpReq=true;
 							},
-							err => toastr.error('<p><strong>'+err.errorMessage+'</strong></p>');
+							(err) =>{
+								// toastr.error('<p><strong>'+err.errorMessage+'</strong></p>'); 
+							}
 						)
 					}
 
@@ -93,7 +95,7 @@ export class OfferComponent implements OnInit {
 					}			
 
 			}else {
-				toastr.warning('Una richiesta già in corso, riprova piu tardi');
+				// toastr.warning('Una richiesta già in corso, riprova piu tardi');
 			}
 		}
 
